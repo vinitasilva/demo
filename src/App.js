@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const createUser = () => {
+    if (name === "" || email === "") {
+      setMessage("Please enter name and email");
+      return;
+    }
+
+    setMessage(`User created successfully: ${name} (${email})`);
+
+    setName("");
+    setEmail("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+      <h1>Create User</h1>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <br />
+
+      <button onClick={createUser}>Create User</button>
+
+      <br />
+      <br />
+
+      <p>{message}</p>
     </div>
   );
 }
